@@ -15,7 +15,14 @@ class CreateUnidadesTable extends Migration
     {
         Schema::create('unidades', function (Blueprint $table) {
             $table->id();
+            $table->string('unidades',5);
+            $table->string('descricao',30);
             $table->timestamps();
+            
+            Schema::table('produtos', function( Blueprint $table ){
+                $table->unsignedBigInteger('unidade_id');
+                $table->foreign('unidade_id')->references('id')->on('unidades');
+            });
         });
     }
 
