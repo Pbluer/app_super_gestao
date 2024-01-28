@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProdutosDetalhes extends Migration
+class CreateProdutoDetalhesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,13 +16,12 @@ class CreateProdutosDetalhes extends Migration
         Schema::create('produtos_detalhes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('produto_id');
-            $table->float('comprimento',8,2);
-            $table->float('altura',8,2);
-            $table->float('largura',8,2);       
+            $table->float('comprimento',8,2)->default(0.00);
+            $table->float('largura',8,2)->default(0.00);
+            $table->float('altura',8,2)->default(0.00);
             $table->timestamps();
 
             $table->foreign('produto_id')->references('id')->on('produtos');
-            $table->unique('produto_id');
         });
     }
 
@@ -33,6 +32,6 @@ class CreateProdutosDetalhes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produtos_detalhes');
+        Schema::dropIfExists('produto_detalhes');
     }
 }
