@@ -1,20 +1,30 @@
 {{ $slot }}
 <form action="{{ route('site.contato') }}" method="post">
     @csrf
-    <input name="nome" type="text" placeholder="Nome" class="borda-preta">
+    <input name="nome" value="{{ old('nome') }}" type="text" placeholder="Nome" class="borda-preta">
     <br>
-    <input name="telefone" type="text" placeholder="Telefone" class="borda-preta">
+    <input name="telefone" value="{{ old('telefone') }}" type="text" placeholder="Telefone" class="borda-preta">
     <br>
-    <input name="email" type="text" placeholder="E-mail" class="borda-preta">
+    <input name="email" value="{{ old('email') }}" type="text" placeholder="E-mail" class="borda-preta">
     <br>
-    <select class="borda-preta" name="motivo_contato">
+    <select class="borda-preta" name="motivo_contatos_id">
         <option selected hidden>Qual o motivo do contato?</option>
-        <option value="1">Dúvida</option>
-        <option value="2">Elogio</option>
-        <option value="3">Reclamação</option>
+        @foreach ($motivo_contato as $key => $value )
+            <option value="{{ $value->id }}" {{ old('motivo_contatos_id') == $key ? 'selected' : '' }} > {{ $value->motivo_contato }} </option>            
+        @endforeach
     </select>
     <br>
-    <textarea class="borda-preta" name="mensagem">Preencha aqui a sua mensagem</textarea>
+    <textarea class="borda-preta" name="mensagem">
+        {{ old('mensagem') != '' ? old('mensagem') : ' Preencha aqui a sua mensagem' }}        
+    </textarea>
     <br>
-    <button type="submit" class="borda-preta">ENVIAR</button>
+    <button type="submit" class="borda-preta">ENVIAR</button>  
 </form>
+
+@if($erros->any())
+<div style="position: absolute;top:0px;left:0px;width:100%;background-color:red;">
+    @foreach( $erros->all() as $erro )
+        {{ $erro }}
+    @endforeach
+</div>
+@endif

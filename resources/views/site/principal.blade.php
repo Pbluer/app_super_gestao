@@ -6,7 +6,7 @@
     <div class="topo">
 
         <div class="logo">
-            <img src="{{ asset('img/logo.png') }}">
+            <a href="{{ route('site.principal') }}"> <img src="{{ asset('img/logo.png') }}"> </a>
         </div>
 
         <div class="menu">
@@ -39,7 +39,6 @@
                 <img src="{{ asset('img/player_video.jpg') }}">
             </div>
         </div>
-
         <div class="direita">
             <div class="contato">
                 <h1>Contato</h1>
@@ -53,10 +52,10 @@
                     <input type="text" placeholder="E-mail" class="borda-branca">
                     <br>
                     <select class="borda-branca">
-                        <option value="">Qual o motivo do contato?</option>
-                        <option value="">Dúvida</option>
-                        <option value="">Elogio</option>
-                        <option value="">Reclamação</option>
+                        <option value="">Qual o motivo do contato?</option>                       
+                        @foreach ($motivo_contato as $key => $value )
+                            <option value="{{ $value->id }}" {{ old('motivo_contatos_id') == $key ? 'selected' : '' }} > {{ $value->motivo_contato }} </option>            
+                        @endforeach
                     </select>
                     <br>
                     <textarea class="borda-branca">Preencha aqui a sua mensagem</textarea>

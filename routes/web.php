@@ -18,7 +18,7 @@ Route::get('/','PrincipalController@principal')->name('site.principal');
 Route::get('/sobre-nos','SobreNos@sobreNos')->name('site.sobreNos');
 
 Route::get('/contato','ContatoController@contato')->name('site.contato');
-Route::post('/contato','ContatoController@contato')->name('site.contato');
+Route::post('/contato','ContatoController@salvar')->name('site.contato');
 
 Route::prefix('/app')->group( function(){
     

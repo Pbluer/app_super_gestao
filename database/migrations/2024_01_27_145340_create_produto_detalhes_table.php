@@ -22,6 +22,7 @@ class CreateProdutoDetalhesTable extends Migration
             $table->timestamps();
 
             $table->foreign('produto_id')->references('id')->on('produtos');
+            $table->unique('produto_id');
         });
     }
 
