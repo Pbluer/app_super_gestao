@@ -20,11 +20,3 @@
     <br>
     <button type="submit" class="borda-preta">ENVIAR</button>  
 </form>
-
-@if($erros->any())
-<div style="position: absolute;top:0px;left:0px;width:100%;background-color:red;">
-    @foreach( $erros->all() as $erro )
-        {{ $erro }}
-    @endforeach
-</div>
-@endif

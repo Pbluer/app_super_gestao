@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SobreNos extends Controller
+class SobreNosController extends Controller
 {
+
     function sobreNos(){
         return view('site.sobreNos');
     }

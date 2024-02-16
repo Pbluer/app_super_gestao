@@ -15,21 +15,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','PrincipalController@principal')->name('site.principal');
 
-Route::get('/sobre-nos','SobreNos@sobreNos')->name('site.sobreNos');
+Route::get('/sobre-nos','SobreNosController@sobreNos')->name('site.sobreNos');
 
 Route::get('/contato','ContatoController@contato')->name('site.contato');
 Route::post('/contato','ContatoController@salvar')->name('site.contato');
 
-Route::prefix('/app')->group( function(){
-    
-    Route::get('/login', fn() => 'login' )->name('app.login');
-    
-    Route::get('/Clientes', fn() => 'clientes' )->name('app.clientes');
+Route::prefix('/app')->group( function(){    
 
-    Route::get('/fornecedores', 'FornecedorController@index' )->name('app.fornecedores');
+    Route::get('/login', fn() => 'login' )
+        ->name('app.login');    
 
-    Route::get('/produtos', fn() => 'produtos' )->name('app.produtos');
+    Route::get('/clientes', fn() => 'clientes' )
+        ->name('app.clientes');
 
+    Route::get('/fornecedores', 'FornecedorController@index' )
+        ->name('app.fornecedores');
+
+    Route::get('/produtos', fn() => 'produtos' )
+        ->name('app.produtos');
 });
 
 
