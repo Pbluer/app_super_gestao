@@ -11,6 +11,11 @@ class LoginController extends Controller
     }
     
     public function autenticar( Request $request){
+        
+
+        $erro = $request->get('erro') == 1 ? 'Usuário não cadastrado.' : null;
+        $erro = $request->get('erro') == 2 ? 'Necessário realizar o login para ter acesso a página.' : null;
+        
 
         //regras de validaçao dos campos
         $regras = [
@@ -34,8 +39,19 @@ class LoginController extends Controller
 
         $user = new User();
 
-        $existe = $user->where('email', $email)->where('password', $senha)->get()->first();
-        echo '<br>';
-        dd($existe);      
+        $usuario = $user->where('email', $email)->where('password', $senha)->get()->first();
+
+        if( isset($usuario->name) ){
+            session_start();
+
+            $_SESSION['nome'] = $usuario->name;
+            $_SESSION['email'] = $usuario->email;
+            
+            return redirect()->route('app.clientes');
+            
+        }else{
+            return redirect()->route('site.login', [ 'erro' => 1] );
+        }
+       
     }
 }

@@ -13,7 +13,20 @@
                     @csrf
                     <input type="text" name="usuario" value="{{ old('usuario') }}" id="usuario" placeholder="Usuário: " class="borda-preta">
                     <input type="password" name="senha" value="{{ old('senha') }}" id="senha" placeholder="Senha: " class="borda-preta">
-                    <button type="submit" class="borda-preta"> Enviar </button>                                      
+                    <button type="submit" class="borda-preta"> Enviar </button>    
+
+                    @if ( $errors->has('usuario'))
+                        <span style="color: red;"> {{ $errors->first('usuario') }} </span>
+                    @endif
+
+                    @if ( $errors->has('senha'))
+                        <span style="color: red;"> {{ $errors->first('senha') }} </span>
+                    @endif
+                   
+                    @if ( isset($_GET['erro']) )
+                        <span style="color: red;"> Usuário não existente.</span>
+                    @endif
+                                               
                 </form>
             </div>
         </div>
