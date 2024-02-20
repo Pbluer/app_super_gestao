@@ -23,17 +23,12 @@ Route::post('/contato','ContatoController@salvar')->name('site.contato');
 Route::get('/login/{erro?}','LoginController@index')->name('site.login');    
 Route::post('/login','LoginController@autenticar')->name('site.login');    
 
-Route::prefix('/app')->group( function(){    
-
-    Route::get('/clientes', fn() => 'clientes' )
-        ->middleware('autenticacao')
-        ->name('app.clientes');
-
-    Route::get('/fornecedores', 'FornecedorController@index' )
-        ->name('app.fornecedores');
-
-    Route::get('/produtos', fn() => 'produtos' )
-        ->name('app.produtos');
+Route::group(['prefix' => '/app', 'middleware' => ['autenticacao']],function(){    
+    Route::get('/home','HomeController@index' )->name('app.home');
+    Route::get('/sair','LoginController@sair' )->name('app.sair');
+    Route::get('/cliente','ClienteController@index' )->name('app.cliente');
+    Route::get('/fornecedor', 'FornecedorController@index' )->middleware('autenticacao')->name('app.fornecedor');
+    Route::get('/produto','ProdutoController@index' )->name('app.produto');
 });
 
 

@@ -8,6 +8,7 @@
             <li><a href="{{ route('site.principal') }}">Principal</a></li>
             <li><a href="{{ route('site.sobreNos') }}">Sobre Nós</a></li>
             <li><a href="{{ route('site.contato') }}">Contato</a></li>
+            <li><a href="{{ route('site.login') }}">Logar</a></li>
         </ul>
     </div>
 </div>

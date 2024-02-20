@@ -16,7 +16,6 @@ class AutenticacaoMiddleware
     public function handle($request, Closure $next)
     {
         session_start();
-        dd($_SESSION);
         if( isset($_SESSION['email']) && $_SESSION['email']  != ''){
             return $next($request);
         }
